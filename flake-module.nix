@@ -1,13 +1,6 @@
 _localFlake:
-{ inputs, ... }:
+_:
 {
-  imports = [
-    inputs.treefmt-nix.flakeModule
-    inputs.devshell.flakeModule
-    inputs.flake-root.flakeModule
-    inputs.git-hooks-nix.flakeModule
-  ];
-
   perSystem =
     { config, pkgs, ... }:
     {
