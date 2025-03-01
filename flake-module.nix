@@ -1,15 +1,4 @@
-{ inputs, ... }:
 {
-
-  imports = [
-
-    inputs.flake-parts.flakeModules.flakeModules
-    inputs.treefmt-nix.flakeModule
-    inputs.devshell.flakeModule
-    inputs.flake-root.flakeModule
-    inputs.git-hooks-nix.flakeModule
-  ];
-
   perSystem =
     { config, pkgs, ... }:
     {
