@@ -1,6 +1,4 @@
-_localFlake:
-_:
-{
+_localFlake: {
   perSystem =
     { config, pkgs, ... }:
     {
