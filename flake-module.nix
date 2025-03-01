@@ -1,8 +1,8 @@
-_localFlake:
 { inputs, ... }:
 {
 
   imports = [
+
     inputs.flake-parts.flakeModules.flakeModules
     inputs.treefmt-nix.flakeModule
     inputs.devshell.flakeModule
