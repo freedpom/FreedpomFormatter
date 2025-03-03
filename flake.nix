@@ -23,24 +23,23 @@
       }:
       let
         inherit (flake-parts-lib) importApply;
-        flakeModules.default = importApply ./flake-module.nix { inherit withSystem inputs config; };
+        flakeModule = importApply ./flake-module.nix { inherit withSystem inputs config; };
       in
       {
         imports = [
-          flakeModules.default
+          inputs.flake-parts.flakeModules.flakeModules
+          flakeModule
         ];
 
         systems = [
           "x86_64-linux"
           "aarch64-linux"
         ];
-        perSystem =
-          _:
-          {
+        perSystem = _: {
 
-          };
+        };
         flake = {
-          inherit flakeModules;
+          inherit flakeModule;
         };
       }
     );
