@@ -1,15 +1,13 @@
 {
-  description = "Description for the project";
+  description = "Formatting Nix code with the freedom of a thousand eagles";
 
   inputs = {
-    treefmt-nix.url = "github:numtide/treefmt-nix";
     devshell.url = "github:numtide/devshell";
-    git-hooks-nix.url = "github:cachix/git-hooks.nix";
-
-    # Flake infrastructure
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
@@ -35,9 +33,7 @@
           "x86_64-linux"
           "aarch64-linux"
         ];
-        perSystem = _: {
 
-        };
         flake = {
           inherit flakeModule;
         };

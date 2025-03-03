@@ -15,31 +15,43 @@ localFlake:
         inherit (config.flake-root) projectRootFile;
         flakeCheck = false;
         programs = {
-          # Nix formatting tools
           nixfmt = {
             enable = true;
             package = pkgs.nixfmt-rfc-style;
           };
-          statix.enable = true; # Static analysis for Nix
-          deadnix.enable = true; # Detect dead code in Nix
+          statix = {
+            enable = true;
+          };
+          deadnix = {
+            enable = true;
+          };
 
-          typos.enable = true;
-          typos.excludes = [
-            "*.png"
-            "*.yaml"
-          ];
+          typos = {
+            enable = true;
+            excludes = [
+              "*.png"
+              "*.yaml"
+            ];
+          };
 
-          # Additional formatters
-          actionlint.enable = true; # GitHub Actions linter
-          mdformat.enable = true; # Markdown formatter
-          yamlfmt.enable = true;
-          shfmt.enable = true;
+          actionlint = {
+            enable = true;
+          };
+          mdformat = {
+            enable = true;
+          };
+          yamlfmt = {
+            enable = true;
+          };
+          shfmt = {
+            enable = true;
+          };
         };
       };
-      # Development environment configuration
+
       devshells.default = {
         name = "NIX UTILITY ENV";
-        motd = ""; # Message of the day
+        motd = "";
         packages = [
           pkgs.rage
           pkgs.sops
@@ -47,7 +59,6 @@ localFlake:
         ] ++ (pkgs.lib.attrValues config.treefmt.build.programs);
       };
 
-      # Git pre-commit hooks
       pre-commit.settings.hooks = {
         treefmt = {
           enable = true;
