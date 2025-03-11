@@ -31,6 +31,7 @@ localFlake:
             excludes = [
               "*.png"
               "*.yaml"
+              "nvf.nix"
             ];
           };
 
