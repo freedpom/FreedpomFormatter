@@ -3,29 +3,38 @@ localFlake:
 { ... }:
 {
   imports = [
-    localFlake.inputs.treefmt-nix.flakeModule
     localFlake.inputs.devshell.flakeModule
     localFlake.inputs.flake-root.flakeModule
     localFlake.inputs.git-hooks-nix.flakeModule
+    localFlake.inputs.treefmt-nix.flakeModule
   ];
   perSystem =
     { pkgs, config, ... }:
     {
+      # Formatting configuration
       treefmt.config = {
         inherit (config.flake-root) projectRootFile;
         flakeCheck = false;
         programs = {
-          nixfmt = {
-            enable = true;
-            package = pkgs.nixfmt-rfc-style;
-          };
-          statix = {
+          actionlint = {
             enable = true;
           };
           deadnix = {
             enable = true;
           };
-
+          mdformat = {
+            enable = true;
+          };
+          nixfmt = {
+            enable = true;
+            package = pkgs.nixfmt-rfc-style;
+          };
+          shfmt = {
+            enable = true;
+          };
+          statix = {
+            enable = true;
+          };
           typos = {
             enable = true;
             excludes = [
@@ -34,22 +43,13 @@ localFlake:
               "nvf.nix"
             ];
           };
-
-          actionlint = {
-            enable = true;
-          };
-          mdformat = {
-            enable = true;
-          };
           yamlfmt = {
-            enable = true;
-          };
-          shfmt = {
             enable = true;
           };
         };
       };
 
+      # Development shell environment
       devshells.default = {
         name = "NIX UTILITY ENV";
         motd = "";
@@ -60,14 +60,15 @@ localFlake:
         ] ++ (pkgs.lib.attrValues config.treefmt.build.programs);
       };
 
+      # Pre-commit hook configuration
       pre-commit.settings.hooks = {
-        treefmt = {
-          enable = true;
-          package = config.treefmt.build.wrapper;
-        };
         statix = {
           enable = true;
           package = config.treefmt.build.programs.statix;
+        };
+        treefmt = {
+          enable = true;
+          package = config.treefmt.build.wrapper;
         };
       };
     };

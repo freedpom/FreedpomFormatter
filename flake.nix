@@ -24,14 +24,14 @@
         flakeModule = importApply ./flake-module.nix { inherit withSystem inputs config; };
       in
       {
-        imports = [
-          inputs.flake-parts.flakeModules.flakeModules
-          flakeModule
-        ];
-
         systems = [
           "x86_64-linux"
           "aarch64-linux"
+        ];
+
+        imports = [
+          inputs.flake-parts.flakeModules.flakeModules
+          flakeModule
         ];
 
         flake = {
