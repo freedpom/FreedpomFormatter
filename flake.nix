@@ -2,7 +2,7 @@
   description = "Formatting Nix code with the freedom of a thousand eagles";
 
   inputs = {
-    devshell.url = "github:numtide/devshell";
+    actions-nix.url = "github:nialov/actions.nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-root.url = "github:srid/flake-root";
     git-hooks-nix.url = "github:cachix/git-hooks.nix";
@@ -10,20 +10,17 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} (
       {
         withSystem,
         flake-parts-lib,
         config,
         ...
-      }:
-      let
+      }: let
         inherit (flake-parts-lib) importApply;
-        flakeModule = importApply ./flake-module.nix { inherit withSystem inputs config; };
-      in
-      {
+        flakeModule = importApply ./flake-module.nix {inherit withSystem inputs config;};
+      in {
         systems = [
           "x86_64-linux"
           "aarch64-linux"
