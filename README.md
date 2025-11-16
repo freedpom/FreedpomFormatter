@@ -5,3 +5,5 @@
 ===      ===      ===      ===     ===   ===  
 ===      ===      ===      ===     ===   ===  
 ```
+
+# Merged with [FreedpomFlake](https://github.com/freedpom/FreedpomFlake)
